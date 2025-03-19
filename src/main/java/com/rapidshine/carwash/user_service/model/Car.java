@@ -1,5 +1,6 @@
 package com.rapidshine.carwash.user_service.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,5 +28,6 @@ public class Car {
     private String licenceNumberPlate;
     @ManyToOne
     @JoinColumn(name = "customer_id",nullable = false)
+    @JsonBackReference
     private Customer customer;
 }

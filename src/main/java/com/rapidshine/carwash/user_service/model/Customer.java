@@ -1,5 +1,7 @@
 package com.rapidshine.carwash.user_service.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,11 +21,13 @@ public class Customer {
     private Long customerID;
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
+    @JsonBackReference
     private User user;
     private String name;
     private String address;
     private String phoneNumber;
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonManagedReference
     private List<Car> cars = new ArrayList<>();
     public Customer(String name,String phoneNumber,String address){
         this.name = name;

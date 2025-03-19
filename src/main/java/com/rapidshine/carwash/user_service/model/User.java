@@ -1,5 +1,6 @@
 package com.rapidshine.carwash.user_service.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class User {
     private UserRole userRole;
     private LocalDateTime timestamp;
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
     private Customer customer;
     private String address;
     private String phoneNumber;
