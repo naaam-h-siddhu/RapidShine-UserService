@@ -18,8 +18,8 @@ public class UserDto {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
-    private String address;
-    private String phoneNumber;
+
+
 
     // Todo -> Add the regex verifications for all the fields
 

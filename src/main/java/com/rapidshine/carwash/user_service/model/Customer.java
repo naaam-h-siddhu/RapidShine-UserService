@@ -26,13 +26,16 @@ public class Customer {
     private String name;
     private String address;
     private String phoneNumber;
+    private String email;
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonManagedReference
     private List<Car> cars = new ArrayList<>();
-    public Customer(String name,String phoneNumber,String address){
+    public Customer(String name,String email,String phoneNumber,String address){
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.email = email;
+
     }
 
 

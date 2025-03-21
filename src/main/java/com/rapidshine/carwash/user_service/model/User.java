@@ -30,8 +30,10 @@ public class User {
     private Customer customer;
     private String address;
     private String phoneNumber;
+    private String auth;
 
-    public User(String name, String email,String phoneNumber, String password, UserRole userRole,String address) {
+    public User(String name, String email,String phoneNumber, String password, UserRole userRole,String address,
+                String auth) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -39,6 +41,6 @@ public class User {
         this.timestamp = LocalDateTime.now();
         this.address = address;
         this.phoneNumber = phoneNumber;
-
+        this.auth = auth;
     }
 }

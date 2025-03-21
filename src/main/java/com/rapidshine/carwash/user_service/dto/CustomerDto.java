@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomerDto {
     String name;
-    String phoneNumber;
-    String address;
+    String email;
     public CustomerDto(UserDto userDto){
         this.name = userDto.getName();
-        this.address = userDto.getAddress();
-        this.phoneNumber = userDto.getPhoneNumber();
+        this.email = userDto.getEmail();
+
     }
 }
