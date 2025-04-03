@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.rapidshine.carwash.user_service.dto.WasherDto;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "washer")
 @Data
+@NoArgsConstructor
 public class Washer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
