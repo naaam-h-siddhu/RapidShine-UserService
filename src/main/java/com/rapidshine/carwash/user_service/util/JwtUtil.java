@@ -1,7 +1,10 @@
 package com.rapidshine.carwash.user_service.util;
 
+import com.rapidshine.carwash.user_service.exceptions.InvalidJwtTokenException;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -32,20 +35,29 @@ public class JwtUtil {
     }
 
     public Claims extractClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(secretKey)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+        try {
+            return Jwts.parser()
+                    .setSigningKey(secretKey)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        }catch (ExpiredJwtException ex){
+            throw  new InvalidJwtTokenException("Token has expired");
+        }catch (MalformedJwtException ex){
+            throw  new InvalidJwtTokenException("Invalid JWT Token!");
+        } catch (Exception e) {
+            throw new InvalidJwtTokenException("JWT Token error : "+e.getMessage());
+        }
+
     }
 
-    public String extractEmail(String token) {
+    public String extractEmail(String token)     {
         return extractClaims(token).getSubject();
     }
-
-    public String extractRole(String token) {
-        return extractClaims(token).get("role", String.class);
-    }
+//
+//    public String extractRole(String token) {
+//        return extractClaims(token).get("role", String.class);
+//    }
 
     public boolean isTokenExpired(String token) {
         return extractClaims(token).getExpiration().before(new Date());

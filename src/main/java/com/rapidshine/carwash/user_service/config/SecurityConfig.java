@@ -1,5 +1,6 @@
 package com.rapidshine.carwash.user_service.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,12 +12,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 public class SecurityConfig {
+    @Autowired
+    private  JwtValidator jwtValidator;
 
-    private final JwtValidator jwtValidator;
 
-    public SecurityConfig(JwtValidator jwtValidator) {
-        this.jwtValidator = jwtValidator;
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
