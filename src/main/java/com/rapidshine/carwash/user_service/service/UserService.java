@@ -1,6 +1,7 @@
 package com.rapidshine.carwash.user_service.service;
 
 import com.rapidshine.carwash.user_service.dto.*;
+import com.rapidshine.carwash.user_service.exceptions.UserNotFoundException;
 import com.rapidshine.carwash.user_service.model.User;
 import com.rapidshine.carwash.user_service.model.UserRole;
 import com.rapidshine.carwash.user_service.repository.UserRepository;
@@ -57,14 +58,14 @@ public class UserService {
     }
     public ResponseEntity<LoginResponseDto> login(String email, String password) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Invalid email or password")); // Generic error to prevent email enumeration
+                .orElseThrow(() -> new RuntimeException("Invalid email")); // Generic error to prevent email enumeration
 
         if (!user.getAuth().equals("Email")) {
-            throw new RuntimeException("Invalid login method");
+            throw new UserNotFoundException("Invalid Email ");
         }
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new RuntimeException("Invalid email or password");
+            throw new RuntimeException("Invalid password");
         }
 
         String token = jwtUtil.generateToken(user.getEmail(), user.getUserRole().name());

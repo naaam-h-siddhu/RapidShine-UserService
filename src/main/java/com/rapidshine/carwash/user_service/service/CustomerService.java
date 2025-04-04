@@ -14,7 +14,6 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
     public void createCustomer(User user, CustomerDto customerDto){
         Customer customer = new Customer(customerDto.getName(),customerDto.getEmail(),

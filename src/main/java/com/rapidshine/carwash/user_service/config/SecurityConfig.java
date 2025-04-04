@@ -9,6 +9,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.List;
 
 @Configuration
 public class SecurityConfig {
@@ -20,10 +23,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Enforce stateless session
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("user/signup", "user/login", "user/health").permitAll()
+                        .requestMatchers("user/signup", "user/login", "user/health","/swagger-ui/**").permitAll()
+                        .requestMatchers("/swagger-ui/**","/v3/api-docs/**","/swagger-ui.html","/swagger-resources" +
+                                "/**","/webjars/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 ;
