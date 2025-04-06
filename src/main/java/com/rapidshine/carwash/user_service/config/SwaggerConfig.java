@@ -26,7 +26,6 @@ public class SwaggerConfig {
                                         .name("Bearer Authentication")
                                         .type(SecurityScheme.Type.HTTP)
                                         .scheme("bearer")
-                                        .bearerFormat("JWT")))
-                .servers(Arrays.asList(new Server().url("htttp://localhost:8081")));
+                                        .bearerFormat("JWT")));
     }
 }

@@ -32,7 +32,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneralExcpeiton(Exception e){
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(e.getMessage(),
-                LocalDateTime.now(),HttpStatus.INTERNAL_SERVER_ERROR.value()));
+                LocalDateTime.now(),HttpStatus.INTERNAL_SERVER_ERROR    .value()));
+    }
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorResponse> handleRuntimeExcpeiton(RuntimeException e){
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(e.getMessage(),
+                LocalDateTime.now(),HttpStatus.INTERNAL_SERVER_ERROR    .value()));
     }
 
 }

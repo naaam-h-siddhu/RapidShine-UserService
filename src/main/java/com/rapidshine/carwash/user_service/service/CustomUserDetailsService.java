@@ -1,5 +1,6 @@
 package com.rapidshine.carwash.user_service.service;
 
+import com.rapidshine.carwash.user_service.exceptions.UserNotFoundException;
 import com.rapidshine.carwash.user_service.model.User;
 import com.rapidshine.carwash.user_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,13 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class CustomeUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email).orElseThrow(() ->  new UsernameNotFoundException("USer not " +
+        User user = userRepository.findByEmail(email).orElseThrow(() ->  new UserNotFoundException("USer not " +
                 "found "));
         return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword() !=null ?
                 user.getPassword(): "",new ArrayList<>());
