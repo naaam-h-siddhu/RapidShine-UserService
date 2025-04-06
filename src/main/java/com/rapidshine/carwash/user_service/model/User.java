@@ -28,6 +28,10 @@ public class User {
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     @JsonIgnore
     private Customer customer;
+
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Washer washer;
     private String address;
     private String phoneNumber;
     private String auth;

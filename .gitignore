@@ -38,4 +38,7 @@ mvnw.cmd
 target
 .mvn
 .idea
+bin
 
+
+.DS_Store
