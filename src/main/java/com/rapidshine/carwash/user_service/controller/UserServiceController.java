@@ -9,6 +9,7 @@ import com.rapidshine.carwash.user_service.util.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -32,10 +33,10 @@ public class UserServiceController {
     }
 
     @PostMapping("/signup")
-    public LoginResponseDto userSignup(@RequestBody UserDto userDTO) {
+    public LoginResponseDto userSignup(@Valid @RequestBody UserDto userDTO) {
         User user = userService.saveUser(userDTO, "Email");
         String token = jwtUtil.generateToken(user.getEmail(), user.getUserRole().name());
-        UserDto userDto = new UserDto(user.getName(), user.getEmail(), user.getPassword(), user.getUserRole());
+        UserDto userDto = new UserDto(user.getName(), user.getEmail(), user.getPassword(), user.getUserRole(),user.getAddress(),user.getPhoneNumber());
         return new LoginResponseDto(token, userDto);
     }
 

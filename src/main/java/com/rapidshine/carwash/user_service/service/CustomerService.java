@@ -17,7 +17,7 @@ public class CustomerService {
 
     public void createCustomer(User user, CustomerDto customerDto){
         Customer customer = new Customer(customerDto.getName(),customerDto.getEmail(),
-                null,null);
+                user.getPhoneNumber(),user.getAddress());
         customer.setUser(user);
         customerRepository.save(customer);
     }

@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "washer")
 @Data
@@ -23,12 +25,18 @@ public class Washer {
     private String phoneNumber;
     private String address;
     private boolean isAvailable;
+    private double rating;
+    private LocalDateTime timeStamp;
+    private int total_services;
+
     public Washer(String name,String email,String address,String phoneNumber,boolean isAvailable){
         this.name= name;
         this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.isAvailable = isAvailable;
+        this.total_services = 0;
+        this.timeStamp = LocalDateTime.now();
     }
 
 }

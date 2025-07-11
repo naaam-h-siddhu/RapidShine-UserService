@@ -12,7 +12,7 @@ public class WasherService {
     @Autowired
     private WasherRepository washerRepository;
     public void createWasher(User user,WasherDto washerDto){
-        Washer washer = new Washer(washerDto.getName(),washerDto.getEmail(),null,null,washerDto.isAvailable());
+        Washer washer = new Washer(washerDto.getName(),washerDto.getEmail(),user.getAddress(),user.getPhoneNumber(),washerDto.isAvailable());
         washer.setUser(user);
         washerRepository.save(washer);
     }

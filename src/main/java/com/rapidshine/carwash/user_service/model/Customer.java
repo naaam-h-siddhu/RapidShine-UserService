@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class Customer {
     private String address;
     private String phoneNumber;
     private String email;
+    private int total_bookings;
+    @Enumerated(EnumType.STRING)
+    private Customer_status customerStatus;
+    private LocalDateTime timeStamp;
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonManagedReference
     private List<Car> cars = new ArrayList<>();
@@ -35,8 +40,12 @@ public class Customer {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.timeStamp = LocalDateTime.now();
+        this.total_bookings = 0;
+        this.customerStatus = Customer_status.ACTIVE;
 
     }
+
 
 
 }

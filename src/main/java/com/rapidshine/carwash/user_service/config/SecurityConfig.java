@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Enforce stateless session
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("user/signup", "user/login", "user/health","/swagger-ui/**").permitAll()
+                        .requestMatchers("user/signup", "user/login", "user/health","/swagger-ui/**","/oauth/token").permitAll()
                         .requestMatchers("/swagger-ui/**","/v3/api-docs/**","/swagger-ui.html","/swagger-resources" +
                                 "/**","/webjars/**").permitAll()
                         .anyRequest().authenticated()
